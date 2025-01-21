@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Page</title>
+</head>
+<body>
+    <h1>Names : </h1>
+
+    {% for i in names %}
+        <p> {{i}} </p>
+        <br>   
+    {% endfor %}
+
+    <img src="{{ url_for('static', filename='images/Alan.jpg') }}" alt="Sample Image" style="max-width: 100%; height: auto;">
+</body>
+</html>
