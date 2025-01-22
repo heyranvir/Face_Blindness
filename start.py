@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify
-import os
+import os, random
 
 app = Flask(__name__)
 
@@ -30,12 +30,16 @@ def home():
 def practice(level):
     l = Levels[level]
     names = Names[:l]
+    random.shuffle(names)
     data = {"names" : names}
     return render_template('practice.html',data = data)
 
 @app.route('/test/<int:level>')
 def test(level):
     l = Levels[level]
+    names = Names[:l]
+    random.shuffle(names)
+    data = {"names" : names}
     return render_template('home.html')
 
 if __name__ == '__main__':

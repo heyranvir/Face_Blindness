@@ -5,10 +5,11 @@
 </head>
 <body>
     <h1>Practice Images</h1>
-    <div id="image-container">
+    <div id="image-container" style="text-align: center;">
         <img id="image" src="" alt="Press Next to load an image" style="width:300px;height:300px;">
+        <p id="name" style="font-size: 20px; margin-top: 10px; color: #333;">Press Next to see a name</p>
     </div>
-    <button id="next-button">Next</button>
+    <button id="next-button" style="margin-top: 20px;">Load next image</button>
 
     <script>
         // The data object is passed from Flask
@@ -16,16 +17,20 @@
         const names = data.names;
         let currentIndex = 0;
 
-        // Function to load the next image
+        // Function to load the next image and name
         function loadNextImage() {
             if (names.length > 0) {
                 // Get the current name
                 const name = names[currentIndex];
 
-                // Load the corresponding image
+                // Update the image
                 const image = document.getElementById('image');
                 image.src = `/static/images/${name}.jpg`; // Assumes images are named after names
                 image.alt = name;
+
+                // Update the name
+                const nameElement = document.getElementById('name');
+                nameElement.textContent = name;
 
                 // Update the index for the next click
                 currentIndex = (currentIndex + 1) % names.length;
