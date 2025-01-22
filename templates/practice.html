@@ -1,18 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practice Page</title>
+    <title>Practice Images</title>
 </head>
 <body>
-    <h1>Names : </h1>
+    <h1>Practice Images</h1>
+    <div id="image-container">
+        <img id="image" src="" alt="Press Next to load an image" style="width:300px;height:300px;">
+    </div>
+    <button id="next-button">Next</button>
 
-    {% for i in names %}
-        <p> {{i}} </p>
-        <br>   
-    {% endfor %}
+    <script>
+        // The data object is passed from Flask
+        const data = {{ data | tojson }};
+        const names = data.names;
+        let currentIndex = 0;
 
-    <img src="{{ url_for('static', filename='images/Alan.jpg') }}" alt="Sample Image" style="max-width: 100%; height: auto;">
+        // Function to load the next image
+        function loadNextImage() {
+            if (names.length > 0) {
+                // Get the current name
+                const name = names[currentIndex];
+
+                // Load the corresponding image
+                const image = document.getElementById('image');
+                image.src = `/static/images/${name}.jpg`; // Assumes images are named after names
+                image.alt = name;
+
+                // Update the index for the next click
+                currentIndex = (currentIndex + 1) % names.length;
+            } else {
+                console.error('Names list is empty!');
+            }
+        }
+
+        // Add an event listener to the "Next" button
+        document.getElementById('next-button').addEventListener('click', loadNextImage);
+    </script>
 </body>
 </html>
+
+
+    <!-- <img src="{{ url_for('static', filename='images/Alan.jpg') }}" alt="Sample Image" style="max-width: 100%; height: auto;"> -->

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 import os
 
 app = Flask(__name__)
@@ -30,9 +30,10 @@ def home():
 def practice(level):
     l = Levels[level]
     names = Names[:l]
-    return render_template('practice.html',names = names)
+    data = {"names" : names}
+    return render_template('practice.html',data = data)
 
-@app.route('/test/<int:number>')
+@app.route('/test/<int:level>')
 def test(level):
     l = Levels[level]
     return render_template('home.html')
