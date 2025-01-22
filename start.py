@@ -40,7 +40,7 @@ def test(level):
     names = Names[:l]
     random.shuffle(names)
     data = {"names" : names}
-    return render_template('home.html')
+    return render_template('test.html',data = data)
 
 if __name__ == '__main__':
     app.run(debug=True)
